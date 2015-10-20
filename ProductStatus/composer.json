@@ -1,0 +1,19 @@
+{
+    "name": "mmhackaton/emailclientcommunicationagent",
+    "description":"N/A",
+    "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0",
+        "magento/module-catalog": "1.0.0-beta"
+    },
+    "type":"magento2-module",
+    "version": "1.0.0-beta",
+    "license": [
+        "BSD-3-Clause"
+    ],
+    "autoload":  {
+        "files" : ["registration.php"],
+        "psr-4": {
+          "MM15PL\\ProductStatus\\": ""
+        }
+    }
+}
