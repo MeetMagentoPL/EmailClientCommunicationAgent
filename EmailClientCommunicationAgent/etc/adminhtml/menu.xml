@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MMHackaton_EmailClientCommunicationAgent::email" title="Emails" 
+             module="MMHackaton_EmailClientCommunicationAgent" parent="Magento_Backend::marketing" sortOrder="10" 
+             resource="MMHackaton_EmailClientCommunicationAgent::email"/>
+        <add id="MMHackaton_EmailClientCommunicationAgent::email_client" title="Email client" 
+             sortOrder="10" module="MMHackaton_EmailClientCommunicationAgent" parent="MMHackaton_EmailClientCommunicationAgent::email" 
+             action="email_client/email/" resource="MMHackaton_EmailClientCommunicationAgent::email_client"/>
+    </menu>
+</config>
