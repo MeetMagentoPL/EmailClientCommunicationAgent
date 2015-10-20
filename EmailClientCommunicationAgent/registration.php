@@ -3,6 +3,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'MMHackaton_ProductStatus',
+    'MMHackaton_EmailClientCommunicationAgent',
     __DIR__
 );
