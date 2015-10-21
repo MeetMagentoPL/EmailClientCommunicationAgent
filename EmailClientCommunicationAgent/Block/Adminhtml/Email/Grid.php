@@ -5,6 +5,18 @@ namespace MMHackaton\EmailClientCommunicationAgent\Block\Adminhtml\Email;
 class Grid extends \Magento\Backend\Block\Widget\Grid
 {
     
+    protected $_collectionFactory;
+    
+    public function __construct(
+        \Magento\Backend\Block\Template\Context $context,
+        \Magento\Backend\Helper\Data $backendHelper,
+        \MMHackaton\EmailClientCommunicationAgent\Model\ResourceModel\Emails\CollectionFactory $collectionFactory,
+        array $data = []
+    ) {
+        $this->_collectionFactory = $collectionFactory;
+        parent::__construct($context, $backendHelper, $data);
+    }
+    
     /**
      * @return void
      */
@@ -23,6 +35,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid
      */
     protected function _prepareCollection()
     {
+        $collection = $this->_collectionFactory->create();
+        $this->setCollection($collection);
         return parent::_prepareCollection();
     }
 
@@ -33,6 +47,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid
      */
     protected function _prepareColumns()
     {
+        $this->addColumn('title', ['header' => __('Title'), 'index' => 'sender']);
+        
         return parent::_prepareColumns();
     }
 
@@ -44,7 +60,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid
      */
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', ['page_id' => $row->getId()]);
+//        return $this->getUrl('*/*/edit', ['page_id' => $row->getId()]);
     }
     
 }
