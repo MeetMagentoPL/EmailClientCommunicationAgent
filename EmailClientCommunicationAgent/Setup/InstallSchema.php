@@ -13,6 +13,9 @@ class InstallSchema implements InstallSchemaInterface
         $installer = $setup;
         $installer->startSetup();
         
+        /**
+         * Create table 'ecca_emailsettings'
+         */
         $table = $installer->getConnection()->newTable(
             $installer->getTable('ecca_emailsettings')
         )->addColumn(
@@ -60,6 +63,65 @@ class InstallSchema implements InstallSchemaInterface
         
         $installer->getConnection()->createTable($table);
         
+        /**
+         * Create table 'catalog_product_entity'
+         */
+        $table = $installer->getConnection()
+            ->newTable($installer->getTable('ecca_mails'))
+            ->addColumn(
+                'entity_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+                'Entity ID'
+            )
+            ->addColumn(
+                'sender',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                null,
+                ['nullable' => false],
+                'Sender'
+            )
+            ->addColumn(
+                'receiver',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                null,
+                ['nullable' => false],
+                'Receiver'
+            )
+            ->addColumn(
+                'received_date',
+                \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME,
+                null,
+                ['nullable' => false],
+                'Receive date'
+            )
+            ->addColumn(
+                'message_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                null,
+                ['nullable' => false],
+                'Message id'
+            )
+            ->addColumn(
+                'headers',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                null,
+                ['nullable' => false],
+                'Message headers'
+            )
+            ->addColumn(
+                'content',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                null,
+                ['nullable' => false],
+                'Message content'
+            )
+            ->setComment('Catalog Product Table');
+        
+        $installer->getConnection()->createTable($table);
+
         $installer->endSetup();
+
     }
 }
