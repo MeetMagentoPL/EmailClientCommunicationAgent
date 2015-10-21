@@ -8,6 +8,9 @@ use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 class DataTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @var \MMHackaton\EmailClientCommunicationAgent\Helper\Data
+     */
     protected $helper;
 
     protected function setUp()
