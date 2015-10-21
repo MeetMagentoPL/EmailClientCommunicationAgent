@@ -43,6 +43,12 @@ class InstallSchema implements InstallSchemaInterface
             ['nullable' => false],
             'Email Password'
         )->addColumn(
+            'email_smtp',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            ['nullable' => false],
+            'Email SMTP Server'
+        )->addColumn(
             'email_port',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,

@@ -3,12 +3,16 @@
 namespace MMHackaton\EmailClientCommunicationAgent\User\Block\User\Edit\Tab;
 
 use \Magento\Backend\Block\Widget\Form\Generic;
+use \Magento\Framework\ObjectManagerInterface;
 
 class EmailSettings extends Generic
 {
     protected $_authSession;
     
+    private $objectManager;
+
     public function __construct(
+            ObjectManagerInterface $om,
             \Magento\Backend\Block\Template\Context $context,
             \Magento\Framework\Registry $registry,
             \Magento\Framework\Data\FormFactory $formFactory,
@@ -16,12 +20,13 @@ class EmailSettings extends Generic
             array $data = array()
             )
     {
-        $this->_authSession = $authSession;
+        $this->authSession = $authSession;
+        $this->objectManager = $om;
         parent::__construct($context, $registry, $formFactory, $data);
     }
     
     protected function _prepareForm()
-    {
+    {  
         $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('emailsettings_');
         
@@ -88,6 +93,13 @@ class EmailSettings extends Generic
                 'class' => 'select'
             ]
         );
+        
+        $model = $this->_coreRegistry->registry('permissions_user');
+       
+        $emailSettingsModel = $this->objectManager
+        ->create('MMHackaton\EmailClientCommunicationAgent\Model\ResourceModel\EmailSettings');
+        $emailSettings = $emailSettingsModel->getByUserId($model->getUserId());
+        $form->setValues($emailSettings);
         
         $this->setForm($form);
         
