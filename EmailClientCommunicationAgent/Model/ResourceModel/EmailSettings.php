@@ -10,4 +10,15 @@ class EmailSettings extends AbstractDb
     {
         $this->_init('ecca_emailsettings', 'entity_id');
     }
+    
+    public function getByUserId($user_id)
+    {
+        $connection = $this->getConnection();
+
+        $select = $connection->select()->from($this->getMainTable())->where('user_id=:user_id');
+
+        $binds = ['user_id' => $user_id];
+
+        return $connection->fetchRow($select, $binds);
+    }
 }

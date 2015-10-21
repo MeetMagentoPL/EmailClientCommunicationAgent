@@ -16,6 +16,7 @@ abstract class Email extends Action
             __('Email client'),
             __('Email client')
         );
+        
         return $this;
     }
     
